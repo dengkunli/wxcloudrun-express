@@ -19,13 +19,15 @@ app.get("/", async (req, res) => {
 });
 
 // 更新计数
-app.post("/api/count", async (req, res) => {
-  const { action } = req.body;
-  if (action === "inc") {
-    count++
-  } else if (action === "clear") {
-    count = 0
-  }
+app.get("/api/inc", async (req, res) => {
+  res.send({
+    code: 0,
+    data: ++count,
+  });
+});
+
+app.get("/api/clear", async (req, res) => {
+  count = 0
   res.send({
     code: 0,
     data: count,

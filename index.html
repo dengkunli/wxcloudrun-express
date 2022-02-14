@@ -78,13 +78,13 @@
           <a
             class="btn btn-success btn-lg count-button"
             style="background: #07c160; border: 0"
-            onclick="set('inc')"
+            onclick="cgi('inc')"
             >计数+1</a
           >
           <a
             class="btn btn-outline-success btn-lg count-button"
             style="background: rgba(0, 0, 0, 0.03); color: #07c160; border: 0"
-            onclick="set('clear')"
+            onclick="cgi('clear')"
             >清零</a
           >
         </div>
@@ -107,24 +107,10 @@
     crossorigin="anonymous"
   ></script>
   <script>
-    init();
-    function init() {
-      $.ajax(location.pathname + "/api/count", {
+    cgi('count');
+    function cgi(action) {
+      $.ajax(location.pathname + "/api/" + action, {
         method: "get",
-      }).done(function (res) {
-        if (res && res.data !== undefined) {
-          $(".count-number").html(res.data);
-        }
-      });
-    }
-    function set(action) {
-      $.ajax(location.pathname + "/api/count", {
-        method: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify({
-          action: action,
-        }),
       }).done(function (res) {
         if (res && res.data !== undefined) {
           $(".count-number").html(res.data);
