@@ -49,7 +49,7 @@ app.get("/api/wx_openid", async (req, res) => {
   }
 });
 
-const port = 8080;
+const port = process.env.SERVER_PORT || 8080;
 
 async function bootstrap() {
   app.listen(port, () => {
